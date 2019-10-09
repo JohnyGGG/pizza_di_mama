@@ -1,0 +1,521 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    overflow-x: hidden;
+}
+
+header {
+    background: linear-gradient( rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('../images/hero.jpg');
+    background-size: cover;
+    height: 1000px;
+    text-align: center;
+}
+
+.logo{
+    color: #fff;
+    font-family: 'Yesteryear', cursive;
+    font-size: 45px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+}
+
+.nav-menu {
+    list-style: none;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-top: 18px;
+
+}
+
+.nav-menu li {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif;
+    margin-left: 20px;
+    transition: 0.4s ease-in-out;
+}
+
+.nav-menu li:hover {
+    color: #F2AC32;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-menu a:visited {
+    text-decoration: none;    
+    color: white;
+}
+
+.nav-menu-active {
+    color: #f2ac32 !important;
+}
+
+.header-title1 {
+    color: #F2AC32;
+    font-family: 'Rochester', cursive;
+    font-size: 55px;
+    margin-top: 187px;
+    margin-bottom: 10px;
+
+}
+
+.header-title2 {
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 70px;
+    letter-spacing: 6px;
+    margin-bottom: 25px;
+}
+
+.header-cta-button {
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    background-color: #f2ac32;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+/******************************************* DISCOVER SECTION  **************************************/
+.discover-section {
+    background-color: #e0dede;
+    display: flex;
+    justify-content: center;
+    padding: 135px 100px;
+}
+
+.food-border {
+    border: 2px solid #f2ac32;
+    position: relative;
+}
+
+.food-overlay {
+    position: absolute;
+    right: 15px;
+    top:10px;
+    padding: 60px 10px 0px 10px;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+}
+
+.food-item {
+    height: 420px;
+    width: 270px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.food-item p {
+    font-size: 19px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.food-1{
+    background-image: url('../images/first-card.jpg');
+    background-size: cover;
+    margin-top: -40px;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+}
+
+.food-2 {
+    background-image: url('../images/second-card.jpg');
+    background-size: cover;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+}
+
+.discover-h1 {
+    font-family: 'Rochester', cursive;
+    color: #F2AC32;   
+    margin-bottom: 10px;
+
+}
+
+.discover-h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: 200;
+    margin-bottom: 10px;
+}
+
+/**************************************** SPECIALITIES SECTION  ************************************************/
+.specialities-section{
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background: linear-gradient( rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('../images/specialities-background2.jpg');
+    background-size: cover;
+}
+
+.specialities-middle {
+    text-align: center;
+    position: relative;
+}
+
+.specialities-h1{
+    font-family: 'Rochester', cursive;
+    color: #F2AC32;   
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.specialities-h2{
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+    letter-spacing: 2px;
+    font-weight: 200;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.specialitites-row{
+    display: flex;
+    justify-content: center;
+}
+
+.specialities-col {
+    width: 350px;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.specialities-image1,
+.specialities-image2,
+.specialities-image3{
+    width: 100%;
+    height: 300px;
+    margin-bottom: 15px;
+    position: relative;
+    cursor: pointer;
+}
+
+.specialities-image1 {
+    background-image: url('../images/spec-1.jpg');
+    background-size: cover;
+}
+
+.specialities-image2{
+    background-image: url('../images/spec-2.jpg');
+    background-size: cover;
+}
+
+.specialities-image3{
+    background-image: url('../images/spec-3.jpg');
+    background-size: cover;
+}
+
+.specialities-h3 {
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 80px;
+}
+
+.specialities-h2 {
+    margin-bottom: 35px;
+}
+
+.specialities-overlay {
+    opacity: 0;
+    background-color: rgba(242,172,50,0.7);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    transition: 0.4s ease-in-out;
+}
+
+.specialities-overlay-border {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    font-size: 22px;
+    
+}
+
+.specialities-image1:hover .specialities-overlay,
+.specialities-image2:hover .specialities-overlay,
+.specialities-image3:hover .specialities-overlay {
+    opacity: 1;
+}
+
+/* .specialities-top,
+.specialities-middle,
+.specialities-bottom {
+    height: 400px;
+    width: 100%;
+} */
+
+.specialities-middle:before {
+    content: '';
+    position: absolute;
+    border-top: 100px solid #e0dede;
+    border-right: 100vw solid transparent;
+    top: -100px;
+    left: 0; 
+}
+
+.specialities-middle:after {
+    content: '';
+    position: absolute;
+    border-bottom: 100px solid #F2AC32;
+    border-left: 100vw solid transparent;
+    bottom: -100px;
+    right: 0;
+}
+
+/**************************************** MENU SECTION  ************************************************/
+
+.menu-section{
+    /* background-color: #e0dede; */
+    background-color: #F2AC32;
+    text-align: center;
+    padding: 30px 20px 60px 20px;
+}
+
+.menu-h1 {
+    font-family: 'Rochester', cursive;
+    /* color: #F2AC32;    */
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.menu-h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+    letter-spacing: 2px;
+    font-weight: 200;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.food-container {
+    position: relative;
+    text-align: left;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 20px;
+}
+
+.menu-row {
+    display: flex;
+    justify-content: center;
+}
+
+.menu-col {
+    width: 40%;
+    max-width: 500px;
+    margin: 60px;
+}
+
+.food-title {
+    display: inline-block;
+}
+
+.food-price {
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    font-size: 25px;
+    /* color: #f2ac32; */
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    margin-left: 20px;
+}
+
+/**************************************** ORDER SECTION  ************************************************/
+
+.order-section {
+    padding: 100px;
+    text-align: center;
+    background-color: #e0dede;
+}
+
+.order-section-h1 {
+    font-family: 'Rochester', cursive;
+    /* color: #F2AC32;    */
+    color: #F2AC32;
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.order-section-h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+    letter-spacing: 2px;
+    font-weight: 200;
+    margin-bottom: 10px;
+    color: black;
+}
+
+
+
+.TabControl{ 
+    width:100%; 
+    overflow:hidden; 
+    /* height:400px */
+}
+
+.TabControl #header{ 
+    width:100%; 
+    /* border: solid 1px;  */
+    overflow:hidden; 
+    cursor:hand;
+    font-family: 'Oswald', sans-serif;
+    color: white;
+}
+
+.TabControl #content{ 
+    width:100%; 
+    /* border: solid 1px; */
+    overflow:hidden; 
+    /* height:100%;  */
+}
+
+.TabControl .abas{
+    display:inline;
+    list-style: none;
+}
+
+.TabControl .abas li{
+    float:left
+}
+
+.aba{
+    width:200px; 
+    height:40px; 
+    border:solid 1px; 
+    border-radius:5px 5px 0 0;
+    text-align:center; 
+    padding-top:5px; 
+    background:#3A5FCD;
+    font-size: 20px;
+}
+
+.ativa{
+    width:200px; 
+    height:40px; 
+    border:solid 1 px; 
+    border-radius:5px 5px 0 0;
+    text-align:center; 
+    padding-top:5px; 
+    background:#27408B;
+}
+
+.ativa span, .selected span{
+    color:#fff
+}
+
+.TabControl #content{
+    background:#27408B
+}
+
+.TabControl .conteudo{
+    width:100%;  
+    background:#27408B; 
+    display:none; 
+    height:100%;
+    color:#fff;
+    padding: 3% 20% 6% 20%;
+    font-size: 25px;
+}
+
+.selected{
+    width:200px; 
+    height:40px; 
+    border:none !important; 
+    border-radius:5px 5px 0 0;
+    /* text-align:center;  */
+    padding-top:5px; 
+    background:#27408B
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-group input ,
+.form-group textarea {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px 5px;
+    font-size: 20px;
+    width: 100%;
+    color: black;
+}
+
+.form-group label {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    padding: 10px;
+    background-color: #F2AC32;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.btn {
+    float: left;
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    padding: 10px;
+    background-color: #F2AC32;
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 20px;
+}
+
+
+/**************************************** FOOTER SECTION  ************************************************/
+
+footer {
+    background: linear-gradient( rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('../images/footer-img.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-color: #f2ac32; */
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    color: white;
+}
+
+.footer-col {
+    display: inline-block;
+    margin-right: 130px;
+    margin-left: 130px;
+
+}
+
+.footer-title {
+    color: #f2ac32;
+}

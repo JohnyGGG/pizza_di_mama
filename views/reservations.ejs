@@ -1,0 +1,32 @@
+<h1>Reservations</h1>
+<hr>
+<% tickets.forEach((ticket) => {%>
+    <h1><%- ticket.name -%></h1>
+    <h1><%- ticket.email -%></h1>
+    <h1><%- ticket.date -%></h1>
+    <h1><%- ticket.numberPeople -%></h1>
+    <h1><%- ticket.considerations -%></h1>
+    <hr>
+<%})%>
+
+<h1>Take- Away</h1>
+<hr>
+<% takeAway.forEach((take) => {%>
+    <h1><%- take.name -%></h1>
+    <h1><%- take.email -%></h1>
+    <h1><%- take.order -%></h1>
+    <h1><%- take.considerations -%></h1>
+    <hr>
+<%})%>
+
+<h1>Order- home</h1>
+<hr>
+<% orderHome.forEach((order) => {%>
+    <h1><%- order.name -%></h1>
+    <h1><%- order.email -%></h1>
+    <h1><%- order.address -%></h1>
+    <h1><%- order.order -%></h1>
+    <h1><%- order.considerations -%></h1>
+    <hr>
+<%})%>
+
