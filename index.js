@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+//var $ = jQuery = require('jquery')(window);
 
 const PORT = process.env.PORT || 5000;
 
@@ -46,7 +47,6 @@ const orderHomeSchema = {
 const orderHome = mongoose.model('homeOrders', orderHomeSchema);
 
 //MENU
-
 const menuItemsSchema = {
     name: String,
     ingredients: String,
@@ -55,6 +55,13 @@ const menuItemsSchema = {
 
 const menuItem = mongoose.model('menuItems', menuItemsSchema);
 
+//USER
+const UserSchema = {
+    email: String,
+    password: String
+}
+
+const User = new mongoose.model('User', UserSchema);
 
 
 app.get('/', (req,res) => {
@@ -63,18 +70,57 @@ app.get('/', (req,res) => {
     });
 });
 
+app.get('/login', (req,res) => {
+    res.render('login');
+});
 
+app.post('/login', (req,res) => {
 
-app.get('/reservations', (req,res) => {
+    const username = req.body.username;
+    const password = req.body.password;
     var tickets;
-    tableBook.find({}, (err, data) => {
-        takeAwayOrder.find({}, (err, data2) => {
-            orderHome.find({}, (err, data3) => {
-                res.render('reservations', {tickets: data, takeAway: data2, orderHome: data3});
-            });       
-        });
+    console.log(username);
+    User.findOne({email: username}, (err,foundUser) => {
+        if(err){
+            console.log(err);
+        }else{
+            console.log(foundUser);
+            if(foundUser) {
+                if( foundUser.password === password){
+                    tableBook.find({}, (err, data) => {
+                        takeAwayOrder.find({}, (err, data2) => {
+                            orderHome.find({}, (err, data3) => {
+                                res.render('reservations', {tickets: data, takeAway: data2, orderHome: data3});
+                            });       
+                        });
+                    });
+                }else{
+                    console.log('Wrong Password');
+                }
+            }else{
+                console.log("user doesn't exist");
+            }
+        }
     });
-    
+});
+
+app.post('/register', (req,res) => {
+    const newUser = new User ({
+        email: req.body.username,
+        password: req.body.password
+    });
+
+    newUser.save((err) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/');
+        }
+    });
+});
+
+app.get('/register', (req,res) => {
+    res.render('register');
 });
 
 app.get('/menu/create', (req,res) => {
@@ -107,16 +153,34 @@ app.post('/take-away', (req,res) => {
     const order = req.body.order;
     const considerations = req.body.considerations;
 
+    var orderArray = [];
+
+    var orderList = order.split('|');
+    orderList.forEach(elm => {
+        var name = elm.split('  x')[0].replace('\r','').replace('\n','');
+        var qtd = elm.split('x  ')[1];
+
+        if(name !== null){
+            var newOrderItem = {
+                name: name,
+                qtd:qtd
+            }
+        }
+
+        orderArray.push(newOrderItem);
+    });
+
     const takeAway = new takeAwayOrder({
         name: resName,
         email: email,
-        order: order,
+        order: orderArray,
         considerations: considerations
     });
 
     takeAway.save();
 
     res.redirect('/');
+    
 });
 
 app.post('/order-home', (req,res) => {
@@ -126,16 +190,34 @@ app.post('/order-home', (req,res) => {
     const order = req.body.order;
     const considerations = req.body.considerations;
 
+    var orderArray = [];
+
+    var orderList = order.split('|');
+    orderList.forEach(elm => {
+        var name = elm.split('  x')[0].replace('\r','').replace('\n','');
+        var qtd = elm.split('x  ')[1];
+
+        if(name !== null){
+            var newOrderItem = {
+                name: name,
+                qtd:qtd
+            }
+        }
+
+        orderArray.push(newOrderItem);
+    });
+
     const orderHomeOrder = new orderHome({
         name: resName,
         email: email,
-        order: order,
+        order: orderArray,
         address: address,
         considerations: considerations
     });
 
     orderHomeOrder.save();
 
+    
     res.redirect('/');
 });
 

@@ -10,12 +10,22 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav id="nav-scroll">
+            <h2 class="logo">Pizza Di Mama</h2>
+            <ul class="nav-menu">
+                <a id="scroll-top-s" href="#"><li class="nav-menu-active">Welcome</li></a>
+                <a id="scroll-menu-s" href="#"><li>Menu</li></a>
+                <a id="scroll-discover-s" href="#"><li>Restaurant</li></a>
+                <a id="scroll-order-s" href="#"><li >Order Now</li></a>
+                <a id="scroll-footer-s" href="#"><li>Find us</li></a>
+            </ul>
+        </nav>
+        <nav id="nav-mainSection">
             <h2 class="logo">Pizza Di Mama</h2>
             <ul class="nav-menu">
                 <a id="scroll-top" href="#"><li class="nav-menu-active">Welcome</li></a>
-                <a id="scroll-menu" href="#"><li>Menu</li></a>
                 <a id="scroll-discover" href="#"><li>Restaurant</li></a>
+                <a id="scroll-menu" href="#"><li>Menu</li></a>
                 <a id="scroll-order" href="#"><li >Order Now</li></a>
                 <a id="scroll-footer" href="#"><li>Find us</li></a>
             </ul>
@@ -87,7 +97,14 @@
         <h2 class="menu-h2">Our Menu</h2>
         <div class="menu-row">
             <div class="menu-col">
-                <div class="food-container">
+                <% for(var i=0; i < items.length/2; i++){ %> 
+                    <div class="food-container">
+                        <h1 class="food-title"><%= items[i].name%></h1>
+                        <span class="food-price"><%= items[i].price%>€</span>
+                        <h3 class="food-ingredients"><%= items[i].ingredients%></h3>
+                    </div>
+                <%}%>
+                <!-- <div class="food-container">
                     <h1 class="food-title">Margarita</h1>
                     <span class="food-price">15€</span>
                     <h3 class="food-ingredients">Mozarella, Basil and Tomato Sauce</h3>
@@ -106,10 +123,17 @@
                     <h1 class="food-title">Sfincione </h1>
                     <span class="food-price">15€</span>
                     <h3 class="food-ingredients">Anchovies, Caciocavallo, Breadcrumbs and Tomato Sauce</h3>
-                </div>
+                </div> -->
             </div>
             <div class="menu-col">
-                <div class="food-container">
+                    <% for(var i=items.length/2; i < items.length; i++){ %>
+                        <div class="food-container">
+                            <h1 class="food-title"><%= items[i].name%></h1>
+                            <span class="food-price"><%= items[i].price%>€</span>
+                            <h3 class="food-ingredients"><%= items[i].ingredients%></h3>
+                        </div>
+                    <%}%>
+                <!-- <div class="food-container">
                     <h1 class="food-title">Quattro stagioni</h1>
                     <span class="food-price">15€</span>
                     <h3 class="food-ingredients">Artichokes, Olives, Peppers, Mozzarella, Tomatoes, Eggs, Mushrooms</h3>
@@ -128,7 +152,7 @@
                     <h1 class="food-title">Calzone</h1>
                     <span class="food-price">15€</span>
                     <h3 class="food-ingredients">Mozzarella, Spinach and Egg</h3>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -185,28 +209,36 @@
                     </form>
                 </div>
                 <div class="conteudo">
-                    <form action="/take-away" method="POST">
+                    <form  id="take-away-form" action="/take-away"  method="POST">
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlInput1">Full Name</label>
-                            <input name="name" type="text" class="form-control" id="exampleFormControlInput1" >
+                            <input id="take-name" name="name" type="text" class="form-control" id="exampleFormControlInput1" required >
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlInput1">Email</label>
-                            <input name="email" type="email" class="form-control" id="exampleFormControlInput1">
+                            <input id="take-email" name="email" type="email" class="form-control" id="exampleFormControlInput1" required>
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlSelect2">Order</label>
-                            <input name="numberPeople" type="text">
+                            <textarea required readonly id="take-away-order-box" name="order" type="text"></textarea>
+                            <select name="" id="take-away-select" class="order-select">
+                                <% items.forEach((item) => { %>
+                                    <option data-price="<%= item.price%>"><%= item.name%></option>
+                                <%})%>
+                            </select>
+                            <input required class="qtd-order" id="qtd-takeaway-input" type="number" placeholder="Quantity">
+                            <button id="take-away-btn" type="button" class="add-order-btn">+</button>
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlTextarea1">Considerations</label>
-                            <textarea name="considerations" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea id="consi-take" name="considerations" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn">Submit</button>
+                        <button id="submit-take-away" type="submit" class="btn">Submit</button>
+                        <div id="total-price-takeaway" class="total-price"></div>
                     </form>
                 </div>
-                <div class="conteudo">
-                    <form action="/order-home" method="POST">
+                <div  class="conteudo">
+                    <form  action="/order-home" method="POST">
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlInput1">Full Name</label>
                             <input name="name" type="text" class="form-control" id="exampleFormControlInput1" >
@@ -221,13 +253,21 @@
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlSelect2">Order</label>
-                            <input name="order" type="text">
+                            <textarea readonly id="order-home-order-box" name="order" type="text"></textarea>
+                            <select name="" id="order-home-select" class="order-select">
+                                <% items.forEach((item) => { %>
+                                    <option><%= item.name%></option>
+                                <%})%>
+                            </select>
+                            <input class="qtd-order" id="qtd-home-input" type="number" placeholder="Quantity">
+                            <button id="order-home-btn" type="button" class="add-order-btn">+</button>
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlTextarea1">Considerations</label>
                             <textarea name="considerations" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn">Submit</button>
+                        <div id="total-price-home" class="total-price"></div>
                     </form>
                 </div>
             </div>
@@ -259,12 +299,7 @@
                 <p class="footer-text">Pinterest</p>
             </div>
             <div class="footer-col">
-                    <% items.forEach((item) => {%>
-                        <h1><%- item.name -%></h1>
-                        <h1><%- item.ingredients -%></h1>
-                        <h1><%- item.price -%></h1>
-                        <hr>
-                    <%})%>
+                
             </div>
         </div>
     </footer>
@@ -288,7 +323,62 @@ $(document).ready(function(){
         ); 
      /////////////////////////////////////////////////////////////////////////////
 
+     const isScrolledIntoView = (elem) => {
+            var docViewTop = $(window).scrollTop();
+            var docViewBottom = docViewTop + $(window).height();
+            var elemTop = $(elem).offset().top;
+            var elemBottom = elemTop + $(elem).height();
+            return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom) && (elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+        }
+
+     $( window ).scroll(function() {
+        $( "#nav-scroll" ).fadeIn();
+        if($(window).scrollTop() === 0) {
+            $("#nav-scroll").fadeOut();
+        }
+
+        //Discover
+        if(isScrolledIntoView($('#discoverSection'))){
+            
+        }
+        //Specialities
+        if(isScrolledIntoView($('#specialitiesSection'))){
+            
+        }
+        //Menu
+        if(isScrolledIntoView($('#menuSection'))){
+            
+        }
+        //Order
+        if(isScrolledIntoView($('#orderSection'))){
+            
+        }
+
+
+    });
+
      ///////////////////////////SCROLLS///////////////////////////////////////////
+
+     $('#scroll-discover-s').click(() => {
+        scrollTo('discover');
+    });
+
+    $('#scroll-menu-s').click(() => {
+        scrollTo('menu');
+    });
+
+    $('#scroll-order-s').click(() => {
+        scrollTo('order');
+    });
+
+    $('#scroll-footer-s').click(() => {
+        scrollTo('footer');
+    });
+
+    $('#scroll-top-s').click(() => {
+        scrollTo('nav-main');
+    });
+    ////////////////////////////////////////////
     $('#scroll-discover').click(() => {
         scrollTo('discover');
     });
@@ -303,6 +393,10 @@ $(document).ready(function(){
 
     $('#scroll-footer').click(() => {
         scrollTo('footer');
+    });
+
+    $('#scroll-top').click(() => {
+        scrollTo('nav-main');
     });
 
     $("#btn-to-order").click(() => {
@@ -325,6 +419,14 @@ $(document).ready(function(){
         abaSelected(2);
     });
 
+    $("#take-away-btn").click(() => {
+        addOrderTakeAway();
+    });
+
+    $("#order-home-btn").click(() => {
+        addOrderHome();
+    });
+
     //FUNCTION TO SCROLL TO ORDER SECTION
     const scrollTo = (section) => {
         $('html,body').animate({
@@ -343,6 +445,67 @@ $(document).ready(function(){
         $('.form-book-table').css('display','block');
     }
 
+    let takeAwayOrder = [];
+    const addOrderTakeAway = () => {
+        let pizza =  $('#take-away-select option:selected').val();
+        let qtd = $('#qtd-takeaway-input').val();
+        let newLine = '';
+        let previousVal = $('#take-away-order-box').val();
+        let price =  $('#take-away-select option:selected').attr('data-price');
+        
+        let newOrderItem = {
+            name: pizza,
+            qtd: qtd,
+            price: price
+        }
+
+        takeAwayOrder.push(newOrderItem);
+
+        updateTotalPrice('takeaway');
+        if(previousVal.length !== 0){
+            newLine = '\n'
+        }
+       
+        $('#take-away-order-box').val(previousVal+newLine+pizza+'  x  '+qtd+'|');
+
+    }
+
+    let orderHomeList = [];
+    const addOrderHome = () => {
+        let pizza =  $('#order-home-select option:selected').val();
+        let qtd = $('#qtd-home-input').val();
+        let newLine = '';
+        let previousVal = $('#order-home-order-box').val();
+        let price =  $('#take-away-select option:selected').attr('data-price');
+
+        let newOrderItem = {
+            name: pizza,
+            qtd: qtd,
+            price: price
+        }
+        
+        orderHomeList.push(newOrderItem);
+
+        updateTotalPrice('home');
+        if(previousVal.length !== 0){
+            newLine = '\n'
+        }
+       
+        $('#order-home-order-box').val(previousVal+newLine+pizza+'  x  '+qtd+'|');
+
+    }
+
+    const updateTotalPrice = (option) => {
+        totalPrice = 0;
+        takeAwayOrder.forEach((elm) => {
+            totalPrice += elm.qtd*elm.price;
+        });
+
+        console.log(totalPrice);
+        $('#total-price-'+option).html('Total: €'+totalPrice);
+        $('#total-price-'+option).show();
+
+    }
 
  });
 

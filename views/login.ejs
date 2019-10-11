@@ -1,0 +1,13 @@
+<%- include partials/header.ejs %>
+<h2 class="logo logoin">Pizza Di Mama</h2>
+<div class="login-container">
+    <div class="form-container">
+        <form id="login-form" action="/login" method="POST">
+            <label for="username">Email</label>
+            <input type="email" name="username">
+            <label for="password">Password</label>
+            <input type="password" name="password">
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+</div>

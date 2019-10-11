@@ -1,3 +1,4 @@
+
 <h1>Reservations</h1>
 <hr>
 <% tickets.forEach((ticket) => {%>
@@ -14,7 +15,10 @@
 <% takeAway.forEach((take) => {%>
     <h1><%- take.name -%></h1>
     <h1><%- take.email -%></h1>
-    <h1><%- take.order -%></h1>
+    <% take.order.forEach((order) => {%>
+        <h1><%- order.name -%></h1>
+        <h1><%- order.qtd -%></h1>
+    <%})%>
     <h1><%- take.considerations -%></h1>
     <hr>
 <%})%>
@@ -25,7 +29,10 @@
     <h1><%- order.name -%></h1>
     <h1><%- order.email -%></h1>
     <h1><%- order.address -%></h1>
-    <h1><%- order.order -%></h1>
+    <% order.order.forEach((order) => {%>
+        <h1><%- order.name -%></h1>
+        <h1><%- order.qtd -%></h1>
+    <%})%>
     <h1><%- order.considerations -%></h1>
     <hr>
 <%})%>

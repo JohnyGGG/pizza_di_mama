@@ -22,6 +22,20 @@ header {
     font-size: 45px;
 }
 
+#nav-scroll {
+    display: none;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 22px;
+}
+
+#nav-scroll .logo {
+    font-size: 40px;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -86,6 +100,12 @@ nav {
     background-color: #f2ac32;
     padding: 10px 20px;
     text-decoration: none;
+    transition: 0.4s ease-in-out;
+}
+
+.header-cta-button:hover {
+    background-color: #805102;
+    transition: 0.4s ease-in-out;
 }
 
 /******************************************* DISCOVER SECTION  **************************************/
@@ -374,7 +394,47 @@ nav {
     color: black;
 }
 
+.order-select {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px 5px;
+    font-size: 20px;
+    width: 45%;
+    color: black;
+    margin-top: 15px;
+    margin-right: 15px;
+    display: inline-block;
+}
 
+#qtd-takeaway-input {
+    width: 45%;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.total-price {
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    font-size: 25px;
+    /* position: absolute; */
+   
+}
+
+#qtd-home-input {
+    width: 45%;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.add-order-btn {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #f2ac32;
+    float: right;
+    margin-top: 15px;
+}
 
 .TabControl{ 
     width:100%; 
@@ -433,7 +493,8 @@ nav {
 }
 
 .TabControl #content{
-    background:#27408B
+    background:#27408B;
+    position: relative;
 }
 
 .TabControl .conteudo{
@@ -518,4 +579,52 @@ footer {
 
 .footer-title {
     color: #f2ac32;
+}
+/**************************************** login SECTION  ************************************************/
+.login-container {
+    padding: 120px 250px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-container{
+    width: 60%;
+}
+
+#login-form input {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 5px;
+    font-size: 20px;
+    width: 100%;
+    color: black;
+}
+
+#login-form label {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    padding: 10px;
+    font-size: 20px;
+    margin-bottom: 6px; 
+}
+
+#login-form button {
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    background-color: #f2ac32;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    margin-top: 25px;
+}
+
+#login-form button:hover {
+    background-color: #df8d00;
+}
+
+.logoin {
+    color: black;
+    margin: 100px;
 }
