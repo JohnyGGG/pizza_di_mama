@@ -184,32 +184,64 @@
             <div id="content">
                 <div class="conteudo">
                     <form action="/reservations" method="POST">
+                        <div id="modal-reservation" class="modal">
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <h1>CONFIRMATION</h1>
+                                <hr>
+                                <div class="data-container">
+                                    <p id="res-name">Name: <span></span></p>
+                                    <p id="res-email">Email: <span></span></p>
+                                    <p id="res-date">Date: <span></span></p>
+                                    <p id="res-n">Nº of People: <span></span></p>
+                                    <p id="res-consi">Considerations: <span></span></p>
+                                </div>
+                                <button type="submit" class="btn-modal btn-modal-confirm">Confirm</button>
+                                <button type="button" id="cancel-res-btn" class="btn-modal btn-modal-cancel">Cancel</button>
+                            </div>
+                        </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlInput1">Full Name</label>
-                            <input name="name" type="text" class="form-control" id="exampleFormControlInput1" >
+                            <input name="name" type="text" class="form-control" id="reservation-name" required>
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlInput1">Email</label>
-                            <input name="email" type="email" class="form-control" id="exampleFormControlInput1">
+                            <input name="email" type="email" class="form-control" id="reservation-email" required>
                         </div>
                         <div class="form-group form-book-table">
                             <label for="date">Reservation Date</label>
-                            <input name="date" type="datetime-local">
+                            <input name="date" type="datetime-local" id="reservation-date" required>
                             </select>
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlSelect2">Nº of People</label>
-                            <input name="numberPeople" type="number">
+                            <input name="numberPeople" type="number" id="reservation-numberP" required>
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlTextarea1">Considerations</label>
-                            <textarea name="considerations" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea name="considerations" class="form-control" id="reservation-considerations" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn">Submit</button>
+                        <button id="reservation-btn" type="button" class="btn">Submit</button>
                     </form>
                 </div>
                 <div class="conteudo">
                     <form  id="take-away-form" action="/take-away"  method="POST">
+                        <div id="modal-takeaway" class="modal">
+                            <!-- Modal content -->
+                            <div id="modal-content-takeaway" class="modal-content">
+                                <h1>CONFIRMATION</h1>
+                                <hr>
+                                <div class="data-container">
+                                    <p id="takeaway-name">Name: <span></span></p>
+                                    <p id="takeaway-email">Email: <span></span></p>
+                                    <p id="takeaway-order">Order: <span></span></p>
+                                    <p id="takeaway-consi">Considerations: <span></span></p>
+                                    <p id="takeaway-price">Price: <span></span></p>
+                                </div>
+                                <button type="submit" class="btn-modal btn-modal-confirm">Confirm</button>
+                                <button type="button" id="cancel-takeaway-btn" type="button" class="btn-modal btn-modal-cancel">Cancel</button>
+                            </div>
+                        </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlInput1">Full Name</label>
                             <input id="take-name" name="name" type="text" class="form-control" id="exampleFormControlInput1" required >
@@ -233,27 +265,44 @@
                             <label for="exampleFormControlTextarea1">Considerations</label>
                             <textarea id="consi-take" name="considerations" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
-                        <button id="submit-take-away" type="submit" class="btn">Submit</button>
+                        <button id="takeaway-btn" type="button" class="btn">Submit</button>
                         <div id="total-price-takeaway" class="total-price"></div>
                     </form>
                 </div>
                 <div  class="conteudo">
                     <form  action="/order-home" method="POST">
+                        <div id="modal-home" class="modal">
+                            <!-- Modal content -->
+                            <div id="modal-content-home" class="modal-content">
+                                <h1>CONFIRMATION</h1>
+                                <hr>
+                                <div class="data-container">
+                                    <p id="home-name">Name: <span></span></p>
+                                    <p id="home-email">Email: <span></span></p>
+                                    <p id="home-address">Address: <span></span></p>
+                                    <p id="home-order">Order: <span></span></p>
+                                    <p id="home-consi">Considerations: <span></span></p>
+                                    <p id="home-price">Price: <span></span></p>
+                                </div>
+                                <button type="submit" class="btn-modal btn-modal-confirm">Confirm</button>
+                                <button type="button" id="cancel-home-btn" type="button" class="btn-modal btn-modal-cancel">Cancel</button>
+                        </div>
+                            </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlInput1">Full Name</label>
-                            <input name="name" type="text" class="form-control" id="exampleFormControlInput1" >
+                            <input name="name" type="text" class="form-control" id="homeO-name" required >
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlInput1">Address</label>
-                            <input name="address" type="text" class="form-control" id="exampleFormControlInput1" >
+                            <input name="address" type="text" class="form-control" id="homeO-address" required>
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlInput1">Email</label>
-                            <input name="email" type="email" class="form-control" id="exampleFormControlInput1">
+                            <input name="email" type="email" class="form-control" id="homeO-email" required>
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlSelect2">Order</label>
-                            <textarea readonly id="order-home-order-box" name="order" type="text"></textarea>
+                            <textarea readonly id="order-home-order-box" name="order" type="text" required></textarea>
                             <select name="" id="order-home-select" class="order-select">
                                 <% items.forEach((item) => { %>
                                     <option><%= item.name%></option>
@@ -264,9 +313,9 @@
                         </div>
                         <div class="form-group form-book-table">
                             <label for="exampleFormControlTextarea1">Considerations</label>
-                            <textarea name="considerations" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea name="considerations" class="form-control" id="homeO-consi" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn">Submit</button>
+                        <button id="home-btn" type="button" class="btn">Submit</button>
                         <div id="total-price-home" class="total-price"></div>
                     </form>
                 </div>
@@ -308,13 +357,14 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-
+    
     ////////////////////////////////ABAS////////////////////////////////////////
      $("#content div:nth-child(1)").show();
      $(".abas li:first div").addClass("selected");       
      $(".aba").click(function(){
          var indice = $(this).parent().index();
          abaSelected(indice);
+         $('.modal').hide();
      });
      
      $(".aba").hover(
@@ -330,13 +380,29 @@ $(document).ready(function(){
             var elemBottom = elemTop + $(elem).height();
             return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom) && (elemBottom <= docViewBottom) && (elemTop >= docViewTop));
         }
+    var previousScroll = 0;
+    $( window ).scroll(function() {
+        var currentScroll = $(this).scrollTop();
 
-     $( window ).scroll(function() {
-        $( "#nav-scroll" ).fadeIn();
-        if($(window).scrollTop() === 0) {
-            $("#nav-scroll").fadeOut();
+
+        //$( "#nav-scroll" ).fadeIn();
+        if (currentScroll > 0 && currentScroll < $(document).height() - $(window).height()){
+            if(currentScroll <= 150){
+                window.setTimeout(hideNav, 100);
+            }
+            else if (currentScroll > previousScroll){
+                window.setTimeout(hideNav, 100);
+
+            } else if (currentScroll == previousScroll) {
+                window.setTimeout(visibleNav, 100);
+            } else {
+                window.setTimeout(showNav, 100);
+            }
+        
+            previousScroll = currentScroll;
         }
 
+        
         //Discover
         if(isScrolledIntoView($('#discoverSection'))){
             
@@ -356,6 +422,14 @@ $(document).ready(function(){
 
 
     });
+
+    const showNav = () => {
+        $( "#nav-scroll" ).fadeIn();
+    }
+
+    const hideNav = () => {
+        $( "#nav-scroll" ).fadeOut();
+    }
 
      ///////////////////////////SCROLLS///////////////////////////////////////////
 
@@ -427,6 +501,36 @@ $(document).ready(function(){
         addOrderHome();
     });
 
+    //MODAL
+    $('#reservation-btn').click( () => {
+        if(checkIfEmpty('res')){
+            console.log('boas');
+            $('#modal-reservation').fadeIn();
+            populateModalReservation();
+            $('body').css('overflow', 'hidden');
+        }
+    });
+
+    $('#takeaway-btn').click( () => {
+        if(checkIfEmpty('takeaway')){
+            $('#modal-takeaway').fadeIn();
+            $('#modal-content-takeaway').fadeIn();
+            $('#modal-content-takeaway .data-container').fadeIn();
+            populateModalTakeaway();
+            $('body').css('overflow', 'hidden');
+        }
+    });
+
+    $('#home-btn').click( () => {
+        if(checkIfEmpty('home')){
+            $('#modal-home').fadeIn();
+            $('#modal-content-home').fadeIn();
+            $('#modal-content-home .data-container').fadeIn();
+            populateModalHome();
+            $('body').css('overflow', 'hidden');
+        }
+    });
+
     //FUNCTION TO SCROLL TO ORDER SECTION
     const scrollTo = (section) => {
         $('html,body').animate({
@@ -443,6 +547,7 @@ $(document).ready(function(){
         $("#content div").hide();
         $("#content div:nth-child("+indice+")").show();
         $('.form-book-table').css('display','block');
+        $('#modal-reservation').hide();
     }
 
     let takeAwayOrder = [];
@@ -497,9 +602,16 @@ $(document).ready(function(){
 
     const updateTotalPrice = (option) => {
         totalPrice = 0;
-        takeAwayOrder.forEach((elm) => {
-            totalPrice += elm.qtd*elm.price;
-        });
+        if(option == 'takeaway'){
+            takeAwayOrder.forEach((elm) => {
+                totalPrice += elm.qtd*elm.price;
+            });
+        }
+        else if(option == 'home'){
+            orderHomeList.forEach((elm) => {
+                totalPrice += elm.qtd*elm.price;
+            });
+        }
 
         console.log(totalPrice);
         $('#total-price-'+option).html('Total: €'+totalPrice);
@@ -507,7 +619,119 @@ $(document).ready(function(){
 
     }
 
+    $('.modal').hide();
+
  });
+
+const populateModalReservation = () => {
+
+    $('#res-name span').html($('#reservation-name').val());
+    $('#res-email span').html($('#reservation-email').val());
+    $('#res-date span').html($('#reservation-date').val());
+    $('#res-n span').html($('#reservation-numberP').val());
+    $('#res-consi span').html($('#reservation-considerations').val());
+};
+
+const populateModalTakeaway = () => {
+
+    $('#takeaway-name span').html($('#take-name').val());
+    $('#takeaway-email span').html($('#take-email').val());
+    $('#takeaway-order span').html($('#take-away-order-box').val());
+    $('#takeaway-consi span').html($('#consi-take').val());
+    $('#takeaway-price span').html($('#total-price-takeaway').html().replace('Total:',''));
+};
+
+const populateModalHome = () => {
+
+    $('#home-name span').html($('#homeO-name').val());
+    $('#home-email span').html($('#homeO-email').val());
+    $('#home-address span').html($('#homeO-address').val());
+    $('#home-order span').html($('#order-home-order-box').val());
+    $('#home-consi span').html($('#homeO-consi').val());
+    $('#home-price span').html($('#total-price-home').html().replace('Total:',''));
+};
+
+ $('#cancel-res-btn').click(()=> {
+    $('#modal-reservation').fadeOut();
+    $('body').css('overflow', 'auto');
+ });
+
+ $('#cancel-takeaway-btn').click(()=> {
+    $('#modal-takeaway').fadeOut();
+    $('body').css('overflow', 'auto');
+ });
+
+ $('#cancel-home-btn').click(()=> {
+    $('#modal-home').fadeOut();
+    $('body').css('overflow', 'auto');
+ });
+
+ const checkIfEmpty = (option) => {
+     let checker = false;
+     if(option == 'res'){
+        if(!$('#reservation-name').val()){
+            $('#reservation-name').addClass('required');
+            $('#reservation-name').attr('placeholder','This field is required!');
+            checker = true;
+        }
+        if(!$('#reservation-email').val()){
+            $('#reservation-email').addClass('required');
+            $('#reservation-email').attr('placeholder','This field is required!');
+            checker = true;
+        }
+        if(!$('#reservation-date').val()){
+            $('#reservation-date').addClass('required');
+            checker = true;
+        }
+        if(!$('#reservation-numberP').val()){
+            $('#reservation-numberP').addClass('required');
+            $('#reservation-numberP').attr('placeholder','This field is required!');
+            checker = true;
+        }
+        if(checker) return false;
+
+     }else if(option == 'takeaway'){
+        if(!$('#take-name').val()){
+            $('#take-name').addClass('required');
+            $('#take-name').attr('placeholder','This field is required!');
+            checker = true;
+        }
+        if(!$('#take-email').val()){
+            $('#take-email').addClass('required');
+            $('#take-email').attr('placeholder','This field is required!');
+            checker = true;
+        }
+        if(!$('#take-away-order-box').val()){
+            $('#take-away-order-box').addClass('required');
+            checker = true;
+        }
+        if(checker) return false;
+     }else if(option == 'home'){
+        if(!$('#homeO-name').val()){
+            $('#homeO-name').addClass('required');
+            $('#homeO-name').attr('placeholder','This field is required!');
+            checker = true;
+        }
+        if(!$('#homeO-address').val()){
+            $('#homeO-address').addClass('required');
+            $('#homeO-address').attr('placeholder','This field is required!');
+            checker = true;
+        }
+        if(!$('#homeO-email').val()){
+            $('#homeO-email').addClass('required');
+            $('#homeO-email').attr('placeholder','This field is required!');
+            checker = true;
+        }
+        if(!$('#order-home-order-box').val()){
+            $('#order-home-order-box').addClass('required');
+            checker = true;
+        }
+        
+        if(checker) return false;
+     }
+
+     return true;
+ }
 
  /////////////////////////////////////////////////////////////////////////////
 </script>

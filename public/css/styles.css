@@ -5,6 +5,15 @@
 
 }
 
+.backdrop {
+    position: absolute;
+    width: 100vh;
+    height: 100vw;
+    background: rgba(0,0,0,.45);
+    display: none;
+    z-index: 200;
+}
+
 body {
     overflow-x: hidden;
 }
@@ -24,6 +33,15 @@ header {
 
 #nav-scroll {
     display: none;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 22px;
+}
+
+#nav-res {
     background-color: black;
     position: fixed;
     top: 0;
@@ -371,10 +389,81 @@ nav {
 
 /**************************************** ORDER SECTION  ************************************************/
 
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    color: black;
+    font-family: 'Oswald', sans-serif;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+}
+
+.modal-content h1{
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.modal-content p{
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.modal-content p span{
+    font-weight: normal;
+}
+
+.modal-content hr {
+    margin-bottom: 10px;
+}
+
+.required {
+    border: 1px solid red !important;
+}
+
+.btn-modal {
+    padding: 15px 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    border: none;
+    margin: 15px 20px 10px 20px;
+    width: 150px;
+    color: white;
+}
+
+.btn-modal-confirm {
+    background-color: rgb(28, 155, 28)
+}
+
+.btn-modal-cancel {
+    background-color: rgb(139, 35, 35);
+}
+
+.data-container {
+    text-align: left;
+}
+
 .order-section {
     padding: 100px;
     text-align: center;
     background-color: #e0dede;
+    position: relative;
 }
 
 .order-section-h1 {
@@ -399,7 +488,7 @@ nav {
     border-radius: 5px;
     padding: 10px 5px;
     font-size: 20px;
-    width: 45%;
+    width: 35%;
     color: black;
     margin-top: 15px;
     margin-right: 15px;
@@ -407,7 +496,7 @@ nav {
 }
 
 #qtd-takeaway-input {
-    width: 45%;
+    width: 35%;
     display: inline-block;
     margin-top: 15px;
 }
@@ -421,7 +510,7 @@ nav {
 }
 
 #qtd-home-input {
-    width: 45%;
+    width: 35%;
     display: inline-block;
     margin-top: 15px;
 }
@@ -627,4 +716,60 @@ footer {
 .logoin {
     color: black;
     margin: 100px;
+}
+
+
+
+/**************************************** BACKOFFICE  ************************************************/
+
+.backoffice-wrapper {
+    padding: 150px 50px 80px 50px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.backoffice-wrapper hr {
+    margin-bottom: 20px;
+}
+
+.title-wrapper {
+    text-align: center;
+}
+
+.reservations-title {
+    margin-bottom: 25px;
+    font-size: 40px;
+}
+
+.reservations-subtitle {
+    font-size: 30px;
+}
+
+.card-container {
+    margin-bottom: 20px;
+    border: 2px solid #f2ac32;
+    padding: 15px;
+    background-color: #f2ac32;
+    color: white;
+    position: relative;
+}
+
+.card-container p {
+    font-size: 25px;
+}
+
+.card-container span {
+    font-weight: bold;
+    margin-right: 10px;
+    color: black;
+}
+
+.buttons-wrapper {
+    position: absolute;
+    right: 0;
+    top: 30%;
+}
+
+.confirmed {
+    background-color: rgb(3, 122, 3);
+    border: none;
 }
