@@ -104,55 +104,15 @@
                         <h3 class="food-ingredients"><%= items[i].ingredients%></h3>
                     </div>
                 <%}%>
-                <!-- <div class="food-container">
-                    <h1 class="food-title">Margarita</h1>
-                    <span class="food-price">15€</span>
-                    <h3 class="food-ingredients">Mozarella, Basil and Tomato Sauce</h3>
-                </div>
-                <div class="food-container">
-                    <h1 class="food-title">Peperoni</h1>
-                    <span class="food-price">15€</span>
-                    <h3 class="food-ingredients">Peperoni, Mozarella, Basil and Tomato Sauce</h3>
-                </div>
-                <div class="food-container">
-                    <h1 class="food-title">4 Cheeses</h1>
-                    <span class="food-price">15€</span>
-                    <h3 class="food-ingredients">Mozzarela, Feta, Ricotta, Parmesan </h3>
-                </div>
-                <div class="food-container">
-                    <h1 class="food-title">Sfincione </h1>
-                    <span class="food-price">15€</span>
-                    <h3 class="food-ingredients">Anchovies, Caciocavallo, Breadcrumbs and Tomato Sauce</h3>
-                </div> -->
             </div>
             <div class="menu-col">
-                    <% for(var i=items.length/2; i < items.length; i++){ %>
-                        <div class="food-container">
-                            <h1 class="food-title"><%= items[i].name%></h1>
-                            <span class="food-price"><%= items[i].price%>€</span>
-                            <h3 class="food-ingredients"><%= items[i].ingredients%></h3>
-                        </div>
-                    <%}%>
-                <!-- <div class="food-container">
-                    <h1 class="food-title">Quattro stagioni</h1>
-                    <span class="food-price">15€</span>
-                    <h3 class="food-ingredients">Artichokes, Olives, Peppers, Mozzarella, Tomatoes, Eggs, Mushrooms</h3>
-                </div>
-                <div class="food-container">
-                    <h1 class="food-title">Fungi</h1>
-                    <span class="food-price">15€</span>
-                    <h3 class="food-ingredients">Sausage, Mushrooms and Mozzarella</h3>
-                </div>
-                <div class="food-container">
-                    <h1 class="food-title">Capricciosa</h1>
-                    <span class="food-price">15€</span>
-                    <h3 class="food-ingredients">Olives, Artichoke Hearts, Egg, Prosciutto and Mushrooms.</h3>
-                </div>
-                <div class="food-container">
-                    <h1 class="food-title">Calzone</h1>
-                    <span class="food-price">15€</span>
-                    <h3 class="food-ingredients">Mozzarella, Spinach and Egg</h3>
-                </div> -->
+                <% for(var i=Math.ceil(items.length/2); i < items.length; i++){ %>
+                    <div class="food-container">
+                        <h1 class="food-title"><%= items[i].name%></h1>
+                        <span class="food-price"><%= items[i].price%>€</span>
+                        <h3 class="food-ingredients"><%= items[i].ingredients%></h3>
+                    </div>
+                <%}%>
             </div>
         </div>
     </div>

@@ -1,0 +1,74 @@
+<%- include partials/header.ejs %>
+<%- include partials/nav-res.ejs %>
+
+<div class="backoffice-wrapper">
+    <div class="title-wrapper">
+        <h1 class="reservations-title">Order-Home</h1>
+    </div>
+    <h3 class="reservations-subtitle">Pending</h3>
+    <hr>
+    <%var x = false; %>
+    <% orderHome.forEach((order) => {%>
+        <%if(!order.confirmed){%>
+            <% x = true; %>
+            <div class="card-container">
+                <p><span>Name:</span><%- order.name -%></p>
+                <p><span>Email:</span><%- order.email -%></p>
+                <p><span>Address:</span><%- order.address -%></p>
+                <p><span>Time:</span><%- order.hours -%></p>
+                <p><span>Order:</span></p>
+                <% order.order.forEach((homeOrder) => {%>
+                    <% if(homeOrder.name){%>
+                        <p><%- homeOrder.name -%> x <%- homeOrder.qtd -%></h1>
+                    <%}%>
+                <%})%>
+                <p><span>Considerations:</span><%- order.considerations -%></p>
+                <form action="/update-order-home" method="POST">
+                    <div class="buttons-wrapper">
+                        <button class="btn-modal btn-modal-confirm">Confirm</button>
+                        <button class="btn-modal btn-modal-cancel">Dismiss</button>
+                        <input name="id" value="<%- order.id %>" type="hidden">
+                    </div>
+                </form>
+            </div>
+        <%}%>
+    <%})%> 
+    <% if(!x){%>
+        <p style="font-size: 25px;margin-bottom: 25px;">No pending orders</p>
+    <%}%>
+    <h3 class="reservations-subtitle">Confirmed</h3>
+    <hr>
+    
+    <% orderHome.forEach((order) => {%>
+        <%if(order.confirmed){%>
+            <div class="card-container confirmed">
+                <p><span>Name:</span><%- order.name -%></p>
+                <p><span>Email:</span><%- order.email -%></p>
+                <p><span>Address:</span><%- order.address -%></p>
+                <p><span>Time:</span><%- order.hours -%></p>
+                <p><span>Order:</span></p>
+                <% order.order.forEach((homeOrder) => {%>
+                    <% if(homeOrder.name){%>
+                        <p><%- homeOrder.name -%> x <%- homeOrder.qtd -%></h1>
+                    <%}%>
+                <%})%>
+                <p><span>Considerations:</span><%- order.considerations -%></p>
+            </div>
+        <%}%>
+    <%})%>
+
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+    $('.nav-menu li').each((index,element) => {
+        $(element).removeClass('nav-menu-active');
+        console.log('boas');
+    });
+
+    $('#orderHome-link').addClass('nav-menu-active');
+    
+});
+
+</script>

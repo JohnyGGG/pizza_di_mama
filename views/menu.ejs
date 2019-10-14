@@ -1,0 +1,124 @@
+<%- include partials/header.ejs %>
+<%- include partials/nav-res.ejs %>
+
+<div class="backoffice-wrapper">
+    <div id="addItemModal" class="modal">    
+        <div id="addItemModalContent" class="modal-content">
+            <form action="/menu/store" method="POST">
+                <label for="name">Title</label>
+                <input name="name" type="text">
+                <label for="ingredients">Ingredients</label>
+                <input name="ingredients" type="text">
+                <label for="price">Price</label>
+                <input name="price" type="number">
+                <div class="modal-btn-wrapper">
+                    <button class="btn-modal btn-modal-confirm" type="submit">Submit</button>
+                    <button id="add-item-cancel" class="btn-modal btn-modal-cancel" type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="editItemModal" class="modal">    
+        <div id="editItemModalContent" class="modal-content">
+            <form action="/menu/edit" method="POST">
+                <label for="name">Title</label>
+                <input id="editItemName" name="name" type="text">
+                <label for="ingredients">Ingredients</label>
+                <input id="editItemIngredients" name="ingredients" type="text">
+                <label for="price">Price</label>
+                <input id="editItemPrice" name="price" type="number">
+                <input id="itemId" type="hidden" name="id">
+                <div class="modal-btn-wrapper">
+                    <button class="btn-modal btn-modal-confirm" type="submit">Submit</button>
+                    <button id="edit-item-cancel" class="btn-modal btn-modal-cancel" type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="title-wrapper">
+        <h1 class="reservations-title">Menu</h1>
+    </div>
+    <div class="add-wrapper">
+        <button id="addMenuItem" class="btn-modal">Add Item</button>
+    </div>
+    <div class="menu-row">
+        
+        <div class="menu-col">
+            <% for( var i = 0; i < items.length / 2; i++){%>
+                <div class="menu-item-card">
+                    <p><span>Name: </span><%- items[i].name %></p>
+                    <p><span>Ingredients: </span><%- items[i].ingredients %></p>
+                    <p><span>Price: €</span><%- items[i].price %></p>
+                    <div class="form-wrapper">
+                        <form action="/menu/delete" method="POST">
+                            <input name="id" type="hidden" value="<%- items[i].id%>">
+                            <button onclick="editClick('<%-items[i].id%>','<%-items[i].name%>','<%-items[i].ingredients%>','<%-items[i].price%>')" id="editItemBtn" class="btn-menu btn-menu-yellow" type="button">Edit</button>
+                            <button class="btn-menu btn-menu-red" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            <%};%>
+        </div>
+        <div class="menu-col">
+            <% for( var i = Math.ceil(items.length / 2); i < items.length ; i++){%>
+                <div class="menu-item-card">
+                    <p><span>Name: </span><%- items[i].name %></p>
+                    <p><span>Ingredients: </span><%- items[i].ingredients %></p>
+                    <p><span>Price: €</span><%- items[i].price %></p>
+                    <div class="form-wrapper">
+                        <form action="/menu/delete" method="POST">
+                            <input name="id" type="hidden" value="<%- items[i].id%>">
+                            <button class="btn-menu btn-menu-yellow" type="button">Edit</button>
+                            <button class="btn-menu btn-menu-red" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            <%};%>
+        </div>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.nav-menu li').each((index,element) => {
+        $(element).removeClass('nav-menu-active');
+        console.log('boas');
+    });
+
+    $('#menu-link').addClass('nav-menu-active');
+
+    $('#addMenuItem').click(() => {
+        $('#addItemModal').fadeIn();
+    });
+
+    $('#add-item-cancel').click( () => {
+        $('#addItemModal').fadeOut();
+    });
+
+    /* $('#editItemBtn').click(() => {
+        $('#editItemModal').fadeIn();
+    }); */
+
+    
+
+    $('#edit-item-cancel').click( () => {
+        $('#editItemModal').fadeOut();
+    });
+    
+});
+
+const editClick = (id, name, ingredients, price) => {
+    console.log(Number(price.replace('€','')));
+    $('#editItemModal').fadeIn();
+    $('#itemId').val(id);
+
+    $('#editItemName').val(name);
+    $('#editItemIngredients').val(ingredients);
+    $('#editItemPrice').val(Number(price.replace('€','')));
+  
+};
+</script>

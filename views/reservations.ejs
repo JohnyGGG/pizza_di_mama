@@ -1,33 +1,22 @@
 <%- include partials/header.ejs %>
+<%- include partials/nav-res.ejs %>
 
-<div class="nav-res-container">
-    <nav id="nav-res">
-        <h2 class="logo">Pizza Di Mama</h2>
-        <ul class="nav-menu">
-            <a id="" href="#"><li class="nav-menu-active">Reservations</li></a>
-            <a id="" href="#"><li>Take Away</li></a>
-            <a id="" href="#"><li>Order Home</li></a>
-            <a id="" href="#"><li >Menu</li></a>
-            <a id="" href="#"><li>Custom</li></a>
-        </ul>
-    </nav>
-</div>
 <div class="backoffice-wrapper">
     <div class="title-wrapper">
         <h1 class="reservations-title">Reservations</h1>
     </div>
     <h3 class="reservations-subtitle">Pending</h3>
     <hr>
+    <%var x = false; %>
     <% tickets.forEach((ticket) => {%>
         <%if(!ticket.confirmed){%>
+            <% x = true; %>
             <div class="card-container">
                 <p><span>Name:</span><%- ticket.name -%></p>
                 <p><span>Email:</span><%- ticket.email -%></p>
                 <p><span>Date:</span><%- ticket.dateFormated -%></p>
                 <p><span>Number of People:</span><%- ticket.numberPeople -%></p>
                 <p><span>Considerations:</span><%- ticket.considerations -%></p>
-                <p><span>Confirmed:</span><%- ticket.confirmed -%></p>
-                <p><span>Confirmed:</span><%- ticket.id -%></p>
                 <form action="/update-table-book" method="POST">
                     <div class="buttons-wrapper">
                         <button class="btn-modal btn-modal-confirm">Confirm</button>
@@ -38,6 +27,9 @@
             </div>
         <%}%>
     <%})%>
+    <% if(!x){%>
+        <p style="font-size: 25px;margin-bottom: 25px;">No pending orders</p>
+    <%}%>
 
     <h3 class="reservations-subtitle">Confirmed</h3>
     <hr>
@@ -50,46 +42,8 @@
                 <p><span>Date:</span><%- ticket.dateFormated -%></p>
                 <p><span>Number of People:</span><%- ticket.numberPeople -%></p>
                 <p><span>Considerations:</span><%- ticket.considerations -%></p>
-                <p><span>Confirmed:</span><%- ticket.confirmed -%></p>
-                <p><span>Confirmed:</span><%- ticket.id -%></p>
             </div>
         <%}%>
     <%})%>
 
-    <!-- <h1 class="reservations-title">Take- Away</h1>
-    
-    <% takeAway.forEach((take) => {%>
-        <div class="card-container">
-            <p><span>Name:</span><%- take.name -%></p>
-            <p><span>Email:</span><%- take.email -%></p>
-            <p><span>Hours:</span><%- take.hours -%></p>
-            <p><span>Order:</span></p>
-            <% take.order.forEach((order) => {%>
-                <% if(order.name.length > 0) {%>
-                    <p><%- order.name -%> x <%- order.qtd -%></h1>
-                <%}%>
-            <%})%>
-            <p><span>Considerations:</span><%- take.considerations -%></p>
-        </div>
-    <%})%>
-
-    <h1 class="reservations-title">Order- home</h1>
-    
-
-    <% orderHome.forEach((order) => {%>
-        <div class="card-container">
-            <p><span>Name:</span><%- order.name -%></p>
-            <p><span>Email:</span><%- order.email -%></p>
-            <p><span>Address:</span><%- order.address -%></p>
-            <p><span>Hours:</span><%- order.hours -%></p>
-            <p><span>Order:</span></p>
-            <% order.order.forEach((homeOrder) => {%>
-                <% if(homeOrder.name){%>
-                    <p><%- homeOrder.name -%> x <%- homeOrder.qtd -%></h1>
-                <%}%>
-            <%})%>
-            <p><span>Considerations:</span><%- order.considerations -%></p>
-        </div>
-
-    <%})%> -->
 </div>

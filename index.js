@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const session = require('express-section');
+var session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 
@@ -23,7 +23,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect('mongodb://localhost:27017/pizzadimamaDB', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://joaol:Boris123$@cluster0-cq7ym.mongodb.net/pizzadimamaDB', {useNewUrlParser: true});
+mongoose.set("useCreateIndex",true);
 
 //TABLE BOOK
 const tableBooksSchema = {
@@ -45,7 +46,8 @@ const takeAwayOrdersSchema = {
     order: Array,
     date: Date,
     hours: String,
-    considerations: String
+    considerations: String,
+    confirmed: Boolean
 }
 
 const takeAwayOrder = mongoose.model('takeAwayOrders', takeAwayOrdersSchema);
@@ -58,7 +60,8 @@ const orderHomeSchema = {
     order: Array,
     date: Date,
     hours: String,
-    considerations: String
+    considerations: String,
+    confirmed: Boolean
 }
 
 const orderHome = mongoose.model('homeOrders', orderHomeSchema);
@@ -100,46 +103,89 @@ app.get('/login', (req,res) => {
 
 app.post('/login', (req,res) => {
 
-    const username = req.body.username;
-    const password = req.body.password;
-    var tickets;
-    
-    User.findOne({email: username}, (err,foundUser) => {
+    const user = new User ({
+        username: req.body.username,
+        password: req.body.password
+    });
+
+    req.login(user,(err) => {
         if(err){
             console.log(err);
         }else{
-            if(foundUser) {
-                if( foundUser.password === password){
-                    tableBook.find({}, (err, data) => {
-                        takeAwayOrder.find({}, (err, data2) => {
-                            orderHome.find({}, (err, data3) => {
-                                res.render('reservations', {tickets: data, takeAway: data2, orderHome: data3});
-                            });       
-                        });
-                    });
-                }else{
-                    console.log('Wrong Password');
-                }
-            }else{
-                console.log("user doesn't exist");
-            }
+            passport.authenticate('local')(req, res, () => {
+                res.redirect('/reservations');
+            });
         }
     });
 });
 
-app.post('/register', (req,res) => {
-    const newUser = new User ({
-        email: req.body.username,
-        password: req.body.password
-    });
+app.get('/logout', (req,res) => {
+    req.logout();
+    res.redirect('/login');
+});
 
-    newUser.save((err) => {
+app.post('/register', (req,res) => {
+    User.register({username: req.body.username},req.body.password, (err, user) =>{
         if(err){
             console.log(err);
-        }else{
-            res.redirect('/');
+            res.redirect('/register');
+        }else {
+            passport.authenticate('local')(req,res,()=>{
+                res.redirect('/reservations');
+            });
         }
     });
+});
+
+app.get('/reservations', (req,res) => {
+    if(req.isAuthenticated()){
+        tableBook.find({}, (err, data) => {  
+            res.render('reservations', {tickets: data});
+        });
+    }else{
+        res.redirect('/login');
+    }
+});
+
+/* tableBook.find({}, (err, data) => {
+        takeAwayOrder.find({}, (err, data2) => {
+            orderHome.find({}, (err, data3) => {
+                res.render('reservations', {tickets: data, takeAway: data2, orderHome: data3});
+            });       
+        });
+    }); */
+
+app.get('/takeaway', (req,res) => {
+    if(req.isAuthenticated()){
+        takeAwayOrder.find({}, (err, data) => {  
+            res.render('takeaway', {takeAway: data});
+        });
+    }else{
+        res.redirect('/login');
+    }
+});
+app.get('/order-home', (req,res) => {
+    if(req.isAuthenticated()){
+        orderHome.find({}, (err, data) => {
+            res.render('order-home', {orderHome: data});
+        });
+    }else{
+        res.redirect('/login');
+    }
+});
+
+app.get('/menu', (req,res) => {
+    if(req.isAuthenticated()){
+        menuItem.find({}, (err, data) => {
+            res.render('menu', {items: data});
+        });
+    }else{
+        res.redirect('/login');
+    }
+    
+});
+app.get('/custom', (req,res) => {
+    res.render('custom');
 });
 
 app.get('/register', (req,res) => {
@@ -207,7 +253,8 @@ app.post('/take-away', (req,res) => {
         order: orderArray,
         date: datetime,
         hours: hours,
-        considerations: considerations
+        considerations: considerations,
+        confirmed: false
     });
 
     takeAway.save();
@@ -251,7 +298,8 @@ app.post('/order-home', (req,res) => {
         address: address,
         date: datetime,
         hours: hours,
-        considerations: considerations
+        considerations: considerations,
+        confirmed: false
     });
 
     orderHomeOrder.save();
@@ -260,7 +308,7 @@ app.post('/order-home', (req,res) => {
     res.redirect('/');
 });
 
-app.post('/menu/store', (req,res) => {
+app.post('/menu/store', async (req,res) => {
     const name = req.body.name;
     const ingredients = req.body.ingredients;
     const price = req.body.price;
@@ -271,9 +319,41 @@ app.post('/menu/store', (req,res) => {
         price: price
     });
 
-    item.save();
+    await item.save();
 
-    res.redirect('/');
+    res.redirect('/menu');
+});
+
+app.post('/menu/delete', async (req,res) => {
+    console.log(req.body.id);
+    menuItem.deleteOne({ _id: req.body.id }, (err) => {
+        if (err) return handleError(err);
+      });
+
+    res.redirect('/menu');
+});
+
+app.post('/menu/edit', async (req,res) => {
+    console.log(req.body.id);
+    menuItem.findOne({ _id: req.body.id }, (err, foundObject) => {
+        if (err) {
+            console.log(err);
+        }else {
+            if(!foundObject){
+                console.log('Not Found');
+            }else{
+                
+                foundObject.name = req.body.name;
+                foundObject.ingredients = req.body.ingredients;
+                foundObject.price = req.body.price;
+               
+
+                foundObject.save();
+            }
+            res.redirect('/menu');
+        }
+
+    });
 });
 
 app.post('/update-table-book', (req,res) => {
@@ -288,29 +368,64 @@ app.post('/update-table-book', (req,res) => {
             }else{
                 foundObject.confirmed = true;
                 foundObject.save();
+
+                res.redirect('/reservations');
             }
         }
     } );
 
+});
 
-    /* tableBook.find({}, (err, data) => {
-        takeAwayOrder.find({}, (err, data2) => {
-            orderHome.find({}, (err, data3) => {
-                res.render('reservations', {tickets: data, takeAway: data2, orderHome: data3});
-            });       
-        });
-    }); */
+app.post('/update-takeaway', (req,res) => {
+    var id = req.body.id;
+    takeAwayOrder.findOne({_id:id},(err, foundObject) => {
+        if(err){
+            console.log(err);
+            res.status(500).send();
+        }else{
+            if(!foundObject){
+                res.status(404).send();
+            }else{
+                foundObject.confirmed = true;
+                foundObject.save();
+
+                res.redirect('/takeaway');
+            }
+        }
+    } );
+
+});
+
+app.post('/update-order-home', (req,res) => {
+    var id = req.body.id;
+    orderHome.findOne({_id:id},(err, foundObject) => {
+        if(err){
+            console.log(err);
+            res.status(500).send();
+        }else{
+            if(!foundObject){
+                res.status(404).send();
+            }else{
+                foundObject.confirmed = true;
+                foundObject.save();
+
+                res.redirect('/order-home');
+            }
+        }
+    } );
 
 });
 
 const getDateFormated = (data) => {
     var date = new Date(data);
-    var dd = date.getDay();
+    var dd = date.getDate();
     var mm = date.getMonth() + 1; 
     var h = date.getHours();
     var m = date.getMinutes();
     var yyyy = date.getFullYear();
-
+    
+    var testeDate = new Date('2019-10-25T19:30:00.000Z');
+    console.log(testeDate.getDay());
     if (dd < 10) {
         dd = '0' + dd;
     } 
@@ -333,10 +448,10 @@ const getHoursFormated = (data) => {
     var m = date.getMinutes();
 
     if (h < 10) {
-        h = '0' + mm;
+        h = '0' + m;
     }
     if (m < 10) {
-        m = '0' + mm;
+        m = '0' + m;
     }
     return h + ':' + m;
 }

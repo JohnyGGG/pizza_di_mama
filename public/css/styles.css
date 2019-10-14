@@ -48,6 +48,7 @@ header {
     width: 100%;
     z-index: 100;
     padding: 22px;
+    
 }
 
 #nav-scroll .logo {
@@ -73,7 +74,7 @@ nav {
     display: inline-block;
     font-family: 'Oswald', sans-serif;
     margin-left: 20px;
-    transition: 0.4s ease-in-out;
+    /* transition: 0.4s ease-in-out; */
 }
 
 .nav-menu li:hover {
@@ -772,4 +773,108 @@ footer {
 .confirmed {
     background-color: rgb(3, 122, 3);
     border: none;
+}
+
+.menu-item-card {
+    margin-bottom: 20px;
+    border: 1px solid #f2ac32;
+    height: 200px;
+    padding: 10px 0 0 10px;
+    position: relative;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.45);
+}
+
+.menu-item-card span{
+    font-weight: bold;
+}
+
+.menu-row {
+    position: relative;
+}
+
+#addMenuItem {
+    /* position: absolute; */
+    /* top: -32px;
+    left: 137px; */
+    background-color: rgb(3, 122, 3);
+}
+
+.menu-item-card p{
+    font-size: 20px;
+}
+
+.form-wrapper {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.btn-menu {
+    padding: 8px 10px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    border: none;
+    margin-right: 10px;
+    width: 80px;
+    color: white;
+}
+
+.btn-menu-red {
+    background-color: rgb(165, 3, 3);
+}
+
+
+.btn-menu-yellow {
+    background-color: #f2ac32;
+}
+
+.btn-menu-red:hover {
+    background-color: rgb(92, 3, 3);
+}
+
+.btn-menu-yellow:hover { 
+    background-color: #c98002;
+}
+
+#addItemModalContent {
+    font-size: 25px;
+    /* display: flex;
+    justify-content: center;
+    text-align: center; */
+}
+
+#addItemModalContent label {
+    display: block;
+}
+
+#addItemModalContent input {
+    font-size: 25px;
+    padding: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.modal-btn-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+#editItemModalContent {
+    font-size: 25px;
+    /* display: flex;
+    justify-content: center;
+    text-align: center; */
+}
+
+#editItemModalContent label {
+    display: block;
+}
+
+#editItemModalContent input {
+    font-size: 25px;
+    padding: 5px;
+    margin-bottom: 20px;
+    width: 100%;
 }

@@ -1,0 +1,16 @@
+<%- include partials/header.ejs %>
+<%- include partials/nav-res.ejs %>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.nav-menu li').each((index,element) => {
+        $(element).removeClass('nav-menu-active');
+        console.log('boas');
+    });
+
+    $('#custom-link').addClass('nav-menu-active');
+    
+});
+</script>
