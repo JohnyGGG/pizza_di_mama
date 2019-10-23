@@ -23,7 +23,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect('mongodb+srv://joaol:Boris123$@cluster0-cq7ym.mongodb.net/pizzadimamaDB', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://joaol:Boris123@cluster0-cq7ym.mongodb.net/pizzadimamaDB', {useNewUrlParser: true});
 mongoose.set("useCreateIndex",true);
 
 //TABLE BOOK
